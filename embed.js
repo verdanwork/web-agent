@@ -1,6 +1,6 @@
 (function() {
     // --- КОНФИГУРАЦИЯ ВСТРАИВАЕМОГО СКРИПТА ---
-    const WIDGET_HOST_URL = 'https://verdanwork.github.io/web-agent/'; // URL, где хостится widget-content (index.html)
+    const WIDGET_HOST_URL = 'https://verdanwork.github.io/web-agent'; // URL, где хостится widget-content (index.html)
     // Важно: Для реального использования замените localhost на URL вашего хостинга!
     const LAUNCHER_BG_COLOR = '#1f2937'; // Цвет кнопки-лаунчера (темно-серый из референса)
     const IFRAME_WIDTH = '350px';      
@@ -63,7 +63,7 @@
         iframe.style.zIndex = '9999';
         iframe.style.display = 'none'; // <-- Изначально скрываем iframe
 
-        iframe.src = `${WIDGET_HOST_URL}/widget-content/index.html`;
+        iframe.src = `${WIDGET_HOST_URL}/index.html`;
         document.body.appendChild(iframe);
         widgetIframe = iframe;
     }
