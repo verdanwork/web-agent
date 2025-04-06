@@ -1,0 +1,138 @@
+body {
+  color: #fff;
+  background-color: #282c34;
+  justify-content: center;
+  align-items: center;
+  min-height: 100vh;
+  margin: 0;
+  font-family: sans-serif;
+  display: flex;
+}
+
+.container {
+  text-align: center;
+  border-radius: 10px;
+  padding: 40px;
+}
+
+h1 {
+  color: #61dafb;
+}
+
+p {
+  color: #ccc;
+}
+
+#voice-visualizer {
+  justify-content: center;
+  align-items: center;
+  width: 150px;
+  height: 150px;
+  margin: 40px auto;
+  display: flex;
+  position: relative;
+}
+
+#voice-circle {
+  z-index: 2;
+  background-color: #61dafb;
+  border-radius: 50%;
+  width: 70px;
+  height: 70px;
+  transition: transform .3s ease-out, background-color .3s ease-out;
+  animation: 3s ease-in-out infinite breathe;
+  position: relative;
+}
+
+#voice-circle:before, #voice-circle:after {
+  content: "";
+  opacity: 0;
+  z-index: 1;
+  pointer-events: none;
+  background-color: #0000;
+  border: 2px solid #61dafb;
+  border-radius: 50%;
+  width: 100%;
+  height: 100%;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%)scale(1);
+}
+
+@keyframes ripple {
+  0% {
+    opacity: .6;
+    transform: translate(-50%, -50%)scale(1);
+  }
+
+  100% {
+    opacity: 0;
+    transform: translate(-50%, -50%)scale(2.5);
+  }
+}
+
+#voice-circle.speaking:before {
+  animation: 1.5s ease-out infinite ripple;
+}
+
+#voice-circle.speaking:after {
+  animation: 1.5s ease-out .5s infinite ripple;
+}
+
+#voice-circle.speaking {
+  background-color: #ff6b6b;
+  animation: none;
+  transform: scale(1.1);
+}
+
+@keyframes breathe {
+  0%, 100% {
+    transform: scale(1);
+    box-shadow: 0 0 15px #61dafb66;
+  }
+
+  50% {
+    transform: scale(1.05);
+    box-shadow: 0 0 25px #61dafbb3;
+  }
+}
+
+#status {
+  color: #aaa;
+  margin-top: 30px;
+  font-style: italic;
+}
+
+.controls {
+  margin-top: 40px;
+}
+
+button {
+  cursor: pointer;
+  color: #282c34;
+  background-color: #61dafb;
+  border: none;
+  border-radius: 5px;
+  margin: 0 10px;
+  padding: 12px 25px;
+  font-size: 16px;
+  font-weight: bold;
+  transition: background-color .2s, transform .1s;
+}
+
+button:disabled {
+  color: #999;
+  cursor: not-allowed;
+  background-color: #555;
+  transform: scale(1);
+}
+
+button:not(:disabled):hover {
+  background-color: #88ecff;
+}
+
+button:not(:disabled):active {
+  transform: scale(.95);
+}
+/*# sourceMappingURL=WebAgent.3a01df49.css.map */

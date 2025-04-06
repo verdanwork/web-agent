@@ -1,0 +1,220 @@
+/* Глобальные стили */
+html {
+    height: 100%; /* <--- Возвращаем */
+    box-sizing: border-box;
+}
+
+*,
+*::before,
+*::after {
+    box-sizing: inherit; /* Наследуем box-sizing от html */
+}
+
+body {
+    font-family: sans-serif;
+    height: 100%; /* <--- Возвращаем */
+    /* Убираем display:flex и центрирование, т.к. это iframe */
+    /* display: flex; */
+    /* justify-content: center; */
+    /* align-items: center; */
+    background-color: #ffffff; 
+    /* Текст по умолчанию темный */
+    color: #1f2937; 
+    margin: 0; /* Убираем все отступы */
+    padding: 0; /* Убираем все паддинги */
+    /* Убираем overflow: hidden с body, пусть .container разбирается */
+    /* overflow: hidden; */
+}
+
+.container {
+    text-align: center;
+    padding: 0; /* Убираем паддинг, header/footer сделают свои */
+    border-radius: 0; /* У iframe уже есть */
+    height: 100%; /* Оставляем здесь */
+    min-height: 100%; /* Оставляем на всякий случай */
+    display: flex;
+    flex-direction: column;
+    overflow: hidden; /* Оставляем здесь */
+    /* Не space-between, контент будет по центру, футер внизу */
+    /* justify-content: space-between; */
+    /* box-sizing: border-box; <-- Убрали, т.к. наследуется */
+}
+
+/* Шапка как в референсе */
+.widget-header {
+    position: relative; /* Не absolute */
+    /* top: 0; */ /* Убираем */
+    /* left: 0; */ /* Убираем */
+    width: 100%;
+    padding: 1rem; /* p-4 Tailwind */
+    background-color: #f9fafb; /* gray-50 */
+    border-bottom: 1px solid #e5e7eb; /* border-gray-200 */
+    display: flex; 
+    justify-content: space-between; /* Заголовок слева, кнопка справа */
+    align-items: center;
+    /* box-sizing: border-box; <-- Убрали */
+}
+
+.widget-header h1 {
+    font-size: 1.125rem; /* text-lg */
+    font-weight: 600; /* font-semibold */
+    color: #1f2937; /* gray-800 */
+    margin: 0; /* Убираем отступы */
+}
+
+#close-widget-button {
+    background: none;
+    border: none;
+    color: #6b7280; /* gray-500 */
+    font-size: 1.5rem; /* Увеличим для соответствия */
+    cursor: pointer;
+    padding: 0; /* Убираем лишние паддинги */
+    line-height: 1;
+    transition: color 0.2s ease;
+}
+#close-widget-button:hover {
+    color: #1f2937; /* gray-800 */
+}
+
+/* Основной контент */
+.main-content {
+    flex-grow: 1;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    padding: 20px; /* Добавим внутренние отступы */
+    /* Убираем padding-top */
+}
+
+/* Убираем старый H1 и P, т.к. заголовок теперь в шапке */
+/* h1 { ... } */
+/* p { ... } */
+
+#voice-visualizer {
+    margin: 25px auto; /* Уменьшим отступы */
+    width: 120px; /* Уменьшим визуализатор */
+    height: 120px;
+    position: relative; 
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+#voice-circle {
+    width: 60px; /* Уменьшим круг */
+    height: 60px;
+    /* Цвет кружка под палитру */
+    background-color: #3b82f6; /* blue-500 Tailwind */
+    border-radius: 50%;
+    transition: transform 0.3s ease-out, background-color 0.3s ease-out;
+    position: relative; 
+    z-index: 2;
+}
+
+/* Анимация "дыхания" в спокойном состоянии */
+#voice-circle {
+     /* Можно оставить или убрать, по вкусу */
+     /* animation: breathe 3s infinite ease-in-out; */
+     box-shadow: 0 0 10px rgba(59, 130, 246, 0.4); /* Тень под цвет */
+}
+
+/* Псевдоэлементы для волн */
+#voice-circle::before,
+#voice-circle::after {
+    content: '';
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    width: 100%;
+    height: 100%;
+    background-color: transparent;
+    /* Цвет волн под палитру */
+    border: 2px solid #60a5fa; /* blue-400 */
+    border-radius: 50%;
+    transform: translate(-50%, -50%) scale(1);
+    opacity: 0;
+    z-index: 1;
+    pointer-events: none; 
+}
+
+/* Анимация волн */
+@keyframes ripple {
+    0% {
+        transform: translate(-50%, -50%) scale(1);
+        opacity: 0.6;
+    }
+    100% {
+        transform: translate(-50%, -50%) scale(2); 
+        opacity: 0;
+    }
+}
+
+/* Применяем анимацию волн */
+#voice-circle.speaking::before {
+    animation: ripple 1.5s infinite ease-out;
+}
+#voice-circle.speaking::after {
+    animation: ripple 1.5s 0.5s infinite ease-out; 
+}
+
+/* Стиль при разговоре */
+#voice-circle.speaking {
+    animation: none; /* Убираем дыхание */
+    transform: scale(1.1); 
+    /* Цвет при разговоре (например, зеленый) */
+    background-color: #10b981; /* emerald-500 */
+    box-shadow: 0 0 15px rgba(16, 185, 129, 0.6); /* Тень под цвет */
+}
+
+/* Убираем анимацию дыхания, если она не нужна */
+/* @keyframes breathe { ... } */
+
+/* Футер для кнопок */
+.controls {
+    padding: 1rem; 
+    background-color: #f9fafb; 
+    border-top: 1px solid #e5e7eb; 
+    width: 100%;
+    /* box-sizing: border-box; <-- Убрали */
+    text-align: center;
+}
+
+/* Стили для ОДНОЙ кнопки */
+.controls button#callButton {
+    padding: 0.6rem 1.5rem; /* Немного увеличим */
+    font-size: 0.9rem; 
+    font-weight: 600; 
+    cursor: pointer;
+    border: none; /* Убираем рамку по умолчанию */
+    border-radius: 0.5rem; /* Скруглим побольше */
+    /* margin: 0 0.25rem; */ /* Убираем боковые отступы */
+    transition: background-color 0.2s ease, color 0.2s ease, transform 0.1s ease, box-shadow 0.2s ease;
+    width: 80%; /* Сделаем кнопку пошире */
+    max-width: 250px;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+}
+
+/* Состояние "Начать разговор" (зеленая) */
+.controls button#callButton.start {
+    background-color: #10b981; /* emerald-500 */
+    color: white;
+}
+.controls button#callButton.start:hover {
+    background-color: #059669; /* emerald-600 */
+    box-shadow: 0 4px 8px rgba(16, 185, 129, 0.3);
+}
+
+/* Состояние "Закончить разговор" (красная) */
+.controls button#callButton.stop {
+    background-color: #ef4444; /* red-500 */
+    color: white;
+}
+.controls button#callButton.stop:hover {
+    background-color: #dc2626; /* red-600 */
+    box-shadow: 0 4px 8px rgba(239, 68, 68, 0.3);
+}
+
+.controls button#callButton:active {
+    transform: scale(0.97); /* Немного уменьшим эффект нажатия */
+} 

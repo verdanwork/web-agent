@@ -1,0 +1,12 @@
+11
+63G:\ProgrammingBaze\Scripts\Agent\WebAgent\widget-content\app.js133878078518770508 0
+69G:\ProgrammingBaze\Scripts\Agent\WebAgent\widget-content\package.json133878056139941858 0
+61G:\ProgrammingBaze\Scripts\Agent\WebAgent\widget-content\dist133878078563959148 1
+67G:\ProgrammingBaze\Scripts\Agent\WebAgent\widget-content\index.html133878077434983622 0
+66G:\ProgrammingBaze\Scripts\Agent\WebAgent\widget-content\style.css133881533128033076 0
+74G:\ProgrammingBaze\Scripts\Agent\WebAgent\widget-content\package-lock.json133878057956449323 0
+89G:\ProgrammingBaze\Scripts\Agent\WebAgent\widget-content\dist\widget-content.3a01df49.css133878078563579426 0
+72G:\ProgrammingBaze\Scripts\Agent\WebAgent\widget-content\dist\index.html133878078563599143 0
+93G:\ProgrammingBaze\Scripts\Agent\WebAgent\widget-content\dist\widget-content.3a01df49.css.map133878078563689141 0
+88G:\ProgrammingBaze\Scripts\Agent\WebAgent\widget-content\dist\widget-content.f72d0d54.js133878078563919131 0
+92G:\ProgrammingBaze\Scripts\Agent\WebAgent\widget-content\dist\widget-content.f72d0d54.js.map133878078563959148 0

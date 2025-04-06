@@ -1,0 +1,16 @@
+{
+  "name": "vapi-web-agent",
+  "version": "1.0.0",
+  "description": "Vapi Web Agent Widget",
+  "main": "embed.js",
+  "scripts": {
+    "start": "parcel widget-content/index.html --port 1234",
+    "build": "parcel build widget-content/index.html"
+  },
+  "dependencies": {
+    "@vapi-ai/web": "^0.1.0"
+  },
+  "devDependencies": {
+    "parcel": "^2.12.0"
+  }
+} 
