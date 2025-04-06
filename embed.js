@@ -7,6 +7,13 @@
     const IFRAME_HEIGHT = '500px';     
     // --- КОНЕЦ КОНФИГУРАЦИИ ---
 
+    // Получаем ID агента из атрибута скрипта
+    const getAgentId = () => {
+        const scripts = document.getElementsByTagName('script');
+        const currentScript = scripts[scripts.length - 1]; // Текущий выполняемый скрипт
+        return currentScript.getAttribute('data-agent-id') || 'default'; // Возвращаем ID агента или значение по умолчанию
+    };
+
     let iframeVisible = false;
     let launcherButton = null;
     let widgetIframe = null;
@@ -63,7 +70,9 @@
         iframe.style.zIndex = '9999';
         iframe.style.display = 'none'; // <-- Изначально скрываем iframe
 
-        iframe.src = `${WIDGET_HOST_URL}/index.html`;
+        // Добавляем ID агента в URL как параметр
+        const agentId = getAgentId();
+        iframe.src = `${WIDGET_HOST_URL}/index.html?agent=${agentId}`;
         document.body.appendChild(iframe);
         widgetIframe = iframe;
     }

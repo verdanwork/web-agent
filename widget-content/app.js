@@ -5,7 +5,8 @@ import Vapi from '@vapi-ai/web';
 // --- КОНФИГУРАЦИЯ --- 
 // !!! ЗАМЕНИ 'YOUR_PUBLIC_API_KEY' НА СВОЙ ПУБЛИЧНЫЙ КЛЮЧ VAPI !!!
 const VAPI_PUBLIC_KEY = 'd0d9e5e2-8e9e-438b-8ed7-80844675afce'; 
-const VAPI_AGENT_ID = 'd6f72630-a173-4726-8797-38080c3140b6';
+// VAPI_AGENT_ID теперь получаем динамически
+// const VAPI_AGENT_ID = 'd6f72630-a173-4726-8797-38080c3140b6';
 // --- КОНЕЦ КОНФИГУРАЦИИ ---
 
 // Убираем statusElement, startButton, stopButton
@@ -25,6 +26,16 @@ let isCalling = false; // Флаг состояния звонка
 // const MAX_CIRCLE_SIZE = 80; 
 // const CIRCLE_SIZE_RANGE = MAX_CIRCLE_SIZE - MIN_CIRCLE_SIZE;
 // --- 
+
+// Получаем ID агента из глобальной функции
+function getAgentIdFromUrl() {
+    // Пытаемся использовать функцию window.getAgentId, если она существует
+    if (typeof window.getAgentId === 'function') {
+        return window.getAgentId();
+    }
+    // Иначе используем ID по умолчанию
+    return 'd6f72630-a173-4726-8797-38080c3140b6';
+}
 
 function setCallButtonState(calling) {
     isCalling = calling;
@@ -131,7 +142,10 @@ async function startConversation() {
         callButton.textContent = 'Подключение...'; // Временный статус на кнопке
         callButton.onclick = null; // Временно отключаем клики
         
-        await vapi.start(VAPI_AGENT_ID); 
+        // Используем ID агента из URL
+        const agentId = getAgentIdFromUrl();
+        console.log('Using Agent ID:', agentId);
+        await vapi.start(agentId); 
         
         // updateStatus('Подключено. Говорите.');
         // Состояние кнопки обновится в 'call-start'
@@ -186,4 +200,4 @@ setCallButtonState(false);
 resetVisualizer(); 
 
 console.log('Vapi Web Agent initialized.');
-console.log('Agent ID:', VAPI_AGENT_ID); 
+console.log('Agent ID:', getAgentIdFromUrl()); 
